@@ -3,8 +3,35 @@
 
 # remove unnecesary packages
 
-sudo pacman -R chromium mpv
+# pacman -R chromium
 
-# install software only if needed 
+# # install software only if needed 
 
-sudo pacman -Syu libreoffice-fresh-en-gb flameshot tcsh qemu cdrkit wine dlang-dmd fbreader mono udiskie languagetool aspell-en aspell-de aspell-es tree r pandoc cmake aegisub ntfs-3g gpicview git python-pip python-virtualenv python-pipenv python-virtualenvwrapper obs-studio audacious audacious-plugins mpg123 audacity klavaro deluge okular geany firefox gparted dosfstools mtools rsync w3m lynx texlive-most imagemagick jdk-openjdk ccid opensc pcsc-tools youtube-dl perl-xml-parser perl-xml-simple inkscape emacs nvidia nvidia-utils nvidia-settings cuda xorg-server-devel opencl-nvidia --need --noconfirm 
+# pacman -Syu libreoffice-fresh-en-gb flameshot tcsh qemu cdrkit wine dlang-dmd fbreader mono udiskie languagetool aspell-en aspell-de aspell-es tree r pandoc cmake aegisub ntfs-3g gpicview git python-pip python-virtualenv python-pipenv python-virtualenvwrapper obs-studio audacious audacious-plugins mpg123 audacity klavaro deluge okular geany firefox gparted dosfstools mtools rsync w3m lynx texlive-most imagemagick jdk-openjdk ccid opensc pcsc-tools youtube-dl perl-xml-parser perl-xml-simple inkscape emacs nvidia nvidia-utils nvidia-settings cuda xorg-server-devel opencl-nvidia --need --noconfirm 
+
+# install rstudio
+
+package=rstudio-desktop-bin
+if pacman -Qi $package > /dev/null ; then
+    printf 'the package %s is already installed\n' "$package"
+else
+    initial_dir=$PWD
+    cd /home/angel/Downloads
+    # download repository without sudo
+    sudo -u angel git clone https://aur.archlinux.org/rstudio-desktop-bin.git
+    cd rstudio-desktop-bin
+    # compile package without sudo
+    sudo -u angel makepkg -Ccsi --noconfirm --needed
+    # modify appearence
+    mkdir -p /home/angel/.config/rstudio
+    sudo -u angel echo '{
+    "editor_theme": "Monokai",
+    "pdf_previewer": "none",
+    "posix_terminal_shell": "bash",
+    "global_theme": "modern"
+}
+' > /home/angel/.config/rstudio/rstudio-prefs.json
+    cd ..
+    rm -rf rstudio-desktop-bin
+    cd $initial_dir
+fi
