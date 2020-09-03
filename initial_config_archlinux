@@ -1,0 +1,52 @@
+#!/bin/bash
+## load linux config customizations
+
+# # declare source directory
+# backup_dir=/run/media/angel/KN28/emacshome/.linux-config/backup-26_08_2020
+
+# # restore keybindings backup
+# dconf load /org/cinnamon/desktop/keybindings/ < ${backup_dir}/dconf-settings.conf
+
+# # restore nemo file manager bookmarks
+# cp ${backup_dir}/bookmarks_backup /home/angel/.config/gtk-3.0/bookmarks
+
+# # restore backup bash scripts from $HOME/bin
+# cp -R ${backup_dir}/bin_backup /home/angel/bin
+# # assign permissions to it
+# chmod -R +x /home/angel/bin
+
+# # restore startup applications backup
+# cp -R ${backup_dir}/autostart-backup /home/angel/.config/autostart
+
+# # linux autologin (source:[[https://www.maketecheasier.com/enable-autologin-lightdm/][url]])
+# cd /run/media/angel/KN28
+# git config --global user.email "raom2004@gmail.com"
+# git config --global user.name "angel"
+# git config --list
+# cd /
+# sudo sed -i 's%#autologin-guest=false%autologin-guest=false%g' /etc/lightdm/lightdm.conf
+# sudo sed -i 's%#autologin-user=%autologin-user=angel%g' /etc/lightdm/lightdm.conf
+# sudo sed -i 's%#autologin-user-timeout=0%autologin-user-timeout=0%g' /etc/lightdm/lightdm.conf
+
+# sudo groupadd -r autologin
+
+# gpasswd -a angel autologin
+
+# # hidden boot menu (GRUB)
+# su
+echo '
+GRUB_FORCE_HIDDEN_MENU="true"
+# GRUB menu is hiden until you press "shift"' > /etc/default/grub
+
+# # fix wrong time in dual boot gnu/linux - windows (linux shell command) 
+# timedatectl set-local-rtc 1 --adjust-system-clock
+
+# download the "gistfile1.sh" as "31_hold_shift"
+cd /etc/grub.d
+sudo wget -c 'https://gist.githubusercontent.com/anonymous/8eb2019db2e278ba99be/raw/257f15100fd46aeeb8e33a7629b209d0a14b9975/gistfile1.sh' --output-document='31_hold_shift'
+
+# asign permissions to it  
+sudo chmod a+x /etc/grub.d/31_hold_shift
+
+# re-generate grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
