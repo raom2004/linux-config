@@ -1,5 +1,8 @@
 #!/bin/bash
-# install depedencies (if not installed previously)
+
+## install tor-browser (not torbrowser-launcher)
+
+# install depedencies (if needed)
 sudo pacman -Sy --needed gnupg python python-gpgme python-pyqt5 python-pysocks python-requests tor python-gnupg --noconfirm
 # set $PWD
 cd /home/angel/Downloads
