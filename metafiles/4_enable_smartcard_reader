@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# ENABLE SMARTCARD READER (DNIe) - requires: ccid opensc pcsc-tools
+#  1.- turn off pinpad (find and replace by "sed")
+sed -i 's/		# use_file_caching = true;/		# use_file_caching = true;\n		enable_pinpad = false/' /etc/opensc.conf
+
+#  2.- enable/disable systemctl service
+systemctl enable pcscd.service
+
+#  3.- need yo run manually:
+#  pcsc_scan
