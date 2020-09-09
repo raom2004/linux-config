@@ -17,3 +17,12 @@ sudo ./metafiles/1_install_software(sudo)
 
 ./metafiles/3_initial_config
 
+
+# ENABLE SMARTCARD READER (DNIe)
+
+./metafiles/4_enable_smartcard_reader
+
+
+# NCBI Entrez EDirect installation
+
+./metafiles/5_NCBI_Edirect_install

@@ -2,12 +2,21 @@
 
 ## install tor-browser (not torbrowser-launcher)
 
+
 # install depedencies (if needed)
+
 sudo pacman -Sy --needed gnupg python python-gpgme python-pyqt5 python-pysocks python-requests tor python-gnupg --noconfirm
+
+
 # set $PWD
-cd /home/angel/Downloads
+
+cd ~/Downloads
+
+
 # download tor-browser if file do not exists
+
 [ ! -d "~/Downloads/tor-browser_en-US" ] && wget -c https://www.torproject.org/dist/torbrowser/9.5.4/tor-browser-linux64-9.5.4_en-US.tar.xz | tar -xf tor-browser-linux64-9.5.4_en-US.tar.xz
+
 
 # (deprecated)
 # git clone torbrowser-launcher repository
@@ -15,9 +24,14 @@ cd /home/angel/Downloads
 # make package
 # cd torbrowser-launcher-git
 # makepkg -si
-# cd /home/angel/.local/share/applications
+# cd ~/.local/share/applications
+
 
 # create folder
+
 mkdir -p ~/.local/share/applications/
+
+
 # copy launcher into folder
+
 cp ~/Downloads/tor-browser_en-US/start-tor-browser.desktop ~/.local/share/applications/start-tor-browser.desktop
