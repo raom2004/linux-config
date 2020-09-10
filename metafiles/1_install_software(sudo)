@@ -4,22 +4,23 @@
 
 ## ------- Arch linux software installation ------- ##
 
-# remove unnecesary packages
+## remove unnecesary packages
 
-pacman -R chromium
+pacman -R chromium --noconfirm
 
-# install software only if needed 
 
-pacman -Syu --need --noconfirm libreoffice-fresh-en-gb flameshot tcsh qemu cdrkit wine dlang-dmd fbreader mono udiskie languagetool aspell-en aspell-de aspell-es tree r pandoc cmake aegisub ntfs-3g gpicview git python-pip python-virtualenv python-pipenv python-virtualenvwrapper obs-studio audacious audacious-plugins mpg123 audacity klavaro deluge okular geany firefox gparted dosfstools mtools rsync w3m lynx texlive-most imagemagick jdk-openjdk ccid opensc pcsc-tools youtube-dl perl-xml-parser perl-xml-simple inkscape emacs nvidia nvidia-utils nvidia-settings cuda xorg-server-devel opencl-nvidia 
+## install r statistics
 
-# install rstudio
+pacman -Sy r
+
+## install rstudio
 
 package=rstudio-desktop-bin
 if pacman -Qi $package > /dev/null ; then
     printf 'the package %s is already installed\n' "$package"
 else
     initial_dir=$PWD
-    cd /home/angel/Downloads
+    cd $HOME/tmp
     # download repository without sudo
     sudo -u angel git clone https://aur.archlinux.org/rstudio-desktop-bin.git
     cd rstudio-desktop-bin
@@ -27,6 +28,7 @@ else
     sudo -u angel makepkg -Ccsi --noconfirm --needed
     # modify appearence
     mkdir -p /home/angel/.config/rstudio
+    # echo prefferences without sudo
     sudo -u angel echo '{
     "editor_theme": "Monokai",
     "pdf_previewer": "none",
@@ -38,3 +40,10 @@ else
     rm -rf rstudio-desktop-bin
     cd $initial_dir
 fi
+
+# install software only if needed 
+
+pacman -Syu --need --noconfirm libreoffice-fresh-en-gb flameshot tcsh qemu cdrkit wine dlang-dmd fbreader mono languagetool aspell-en aspell-de aspell-es tree pandoc cmake aegisub ntfs-3g gpicview git python-pip python-virtualenv python-pipenv python-virtualenvwrapper obs-studio audacious audacious-plugins mpg123 audacity klavaro deluge okular geany firefox gparted dosfstools mtools rsync w3m lynx texlive-most imagemagick jdk-openjdk ccid opensc pcsc-tools youtube-dl perl-xml-parser perl-xml-simple inkscape emacs nvidia nvidia-utils nvidia-settings cuda xorg-server-devel opencl-nvidia 
+
+# deprecated
+# pacman -Syu udiskie

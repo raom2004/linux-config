@@ -5,7 +5,7 @@
 
 # install software with "pacman"
 
-sudo ./metafiles/1_install_software(sudo)
+sudo "./metafiles/1_install_software(sudo)"
 
 
 # install tor-browser (different to -torbrowser-launcher)
