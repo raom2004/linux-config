@@ -8,17 +8,17 @@ backup_dir=$(ls /run/media/angel/KN28/emacshome/.linux-config/* -d)
 
 # restore keybindings backup
 
-dconf load /org/cinnamon/desktop/keybindings/ < ${backup_dir}dconf-settings.conf
+dconf load /org/cinnamon/desktop/keybindings/ < ${backup_dir}/dconf-settings.conf
 
 
 # restore nemo file manager bookmarks
 
-cp ${backup_dir}bookmarks_backup ~/.config/gtk-3.0/bookmarks
+cp ${backup_dir}/bookmarks_backup ~/.config/gtk-3.0/bookmarks
 
 
 # restore custom bash scripts backup
 
-cp -R ${backup_dir}bin_backup ~/bin
+cp -R ${backup_dir}/bin_backup ~/bin
 
 
 # assign execution permissions
@@ -28,7 +28,7 @@ chmod -R +x ~/bin
 
 # restore startup applications backup
 
-cp -R ${backup_dir}autostart-backup ~/.config/autostart
+cp -R ${backup_dir}/autostart-backup ~/.config/autostart
 
 
 ## set applications custom config
