@@ -35,15 +35,15 @@ cp -R ${backup_dir}/autostart-backup ~/.config/autostart
 
 # Default Applications and Associations
 
-cp /run/media/angel/KN28/emacshome/.config/mimeapps.list /home/angel/.config/mimeapps.list
+cp /run/media/angel/KN28/emacshome/.config/mimeapps.list $HOME/.config/mimeapps.list
 
 # Okular
 
 # (pdf color scheme)
-cp /run/media/angel/KN28/emacshome/.config/okularpartrc /home/angel/.config/okularpartrc
+cp /run/media/angel/KN28/emacshome/.config/okularpartrc $HOME/.config/okularpartrc
 
 # toggle change color (Shitf+F9)
-cp -R /run/media/angel/KN28/emacshome/.local/share/kxmlgui5 /home/angel/.local/share/kxmlgui5
+cp -R /run/media/angel/KN28/emacshome/.local/share/kxmlgui5 $HOME/.local/share/kxmlgui5
 
 # Geany (copy complete config)
 
