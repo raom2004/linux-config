@@ -1,0 +1,11 @@
+# url="https://github.com/coffeeking/chihuahua-sound-theme.git"
+# git clone $url /tmp/cofeeking
+# cp -R /tmp/cofeeking/chihuahua /usr/share/sounds
+
+git clone "https://aur.archlinux.org/yaru.git" /tmp/yaru
+cd /tmp/yaru
+sudo -u angel makepkg
+sudo mkdir -p /usr/share/sounds/yaru
+sudo cp -R /tmp/yaru/src/yaru-20.10.3/sounds/src/* /usr/share/sounds/yaru
+
+dconf load / < /run/media/angel/KN28/emacshome/config/cynnamon_dump
