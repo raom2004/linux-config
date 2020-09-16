@@ -43,7 +43,7 @@ fi
 
 # install software only if needed 
 
-pacman -Syu --need --noconfirm libreoffice-fresh-en-gb flameshot tcsh qemu cdrkit wine dlang-dmd fbreader mono languagetool aspell-en aspell-de aspell-es tree pandoc cmake aegisub ntfs-3g gpicview git python-pip python-virtualenv python-pipenv python-virtualenvwrapper obs-studio audacious audacious-plugins mpg123 audacity klavaro deluge okular geany firefox gparted dosfstools mtools rsync w3m lynx texlive-most imagemagick jdk-openjdk ccid opensc pcsc-tools youtube-dl perl-xml-parser perl-xml-simple inkscape emacs nvidia nvidia-utils nvidia-settings cuda xorg-server-devel opencl-nvidia 
+pacman -Syu --need --noconfirm p7zip gitg gsettings-desktop-schemas libreoffice-fresh-en-gb flameshot tcsh qemu cdrkit wine dlang-dmd fbreader mono languagetool aspell-en aspell-de aspell-es tree pandoc cmake aegisub ntfs-3g gpicview git python-pip python-virtualenv python-pipenv python-virtualenvwrapper obs-studio audacious audacious-plugins mpg123 audacity klavaro deluge okular geany firefox gparted dosfstools mtools rsync w3m lynx texlive-most imagemagick jdk-openjdk ccid opensc pcsc-tools youtube-dl perl-xml-parser perl-xml-simple inkscape emacs nvidia nvidia-utils nvidia-settings cuda xorg-server-devel opencl-nvidia 
 
 # deprecated
 # pacman -Syu udiskie
