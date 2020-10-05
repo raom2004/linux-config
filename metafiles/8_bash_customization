@@ -1,0 +1,9 @@
+#!/bin/bash
+## 8_bash_customization
+
+# bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
+# Install oh-my-bash in custom DIR
+# export OSH="/run/media/angel/KN28/emacshome/.linux-config/.dotfiles/oh-my-bash"; sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
+cat /run/media/angel/KN28/emacshome/.linux-config/bash-customization.txt >> ~/.bashrc 
