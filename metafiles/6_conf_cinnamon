@@ -2,10 +2,14 @@
 # git clone $url /tmp/cofeeking
 # cp -R /tmp/cofeeking/chihuahua /usr/share/sounds
 
-git clone "https://aur.archlinux.org/yaru.git" /tmp/yaru
+# git clone "https://aur.archlinux.org/yaru.git" /tmp/yaru
+sudo pacman -Sy meson sassc --needed --noconfirm
 cd /tmp/yaru
-sudo -u angel makepkg
+makepkg
+# sudo -u angel makepkg
 sudo mkdir -p /usr/share/sounds/yaru
-sudo cp -R /tmp/yaru/src/yaru-20.10.3/sounds/src/* /usr/share/sounds/yaru
+# sudo mkdir -p /usr/share/sounds/yaru
+sudo cp -R -u -p /tmp/yaru/src/yaru-*/sounds/src/* /usr/share/sounds/yaru
+# sudo cp -R /tmp/yaru/src/yaru-20.10.3/sounds/src/* /usr/share/sounds/yaru
 
 dconf load / < /run/media/angel/KN28/emacshome/config/cynnamon_dump

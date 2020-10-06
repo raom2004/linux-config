@@ -4,7 +4,8 @@
 
 # declare source directory
 
-backup_dir=$(ls /run/media/angel/KN28/emacshome/.linux-config/* -d)
+# backup_dir=$(ls /run/media/angel/KN28/emacshome/.linux-config/* -d)
+backup_dir="/run/media/angel/KN28/emacshome/.linux-config/backup-26_08_2020"
 
 # restore keybindings backup
 
