@@ -51,11 +51,3 @@ pacman -Sy --needed --noconfirm nvidia nvidia-utils nvidia-settings xorg-server-
 
 # FIXME 2020-10-06 missing icons in cinnamon
 pacman -Sy --needed --noconfirm adwaita-icon-theme akonadiconsole breeze-icons gnome-icon-theme-symbolic icon-naming-utils kemoticons oxygen-icons oxygen-icons-svg
-
-# disable autosuspend bluetooth
-# check it
-# systool -v -m btusb
-
-# echo '
-# options btusb enable_autosuspend=n
-# ' > /etc/modprobe.d/disable_autosuspend.conf

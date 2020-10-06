@@ -1,0 +1,32 @@
+#!/bin/bash
+
+sudo pacman -Sy --needed --noconfirm bluez bluez-libs bluez-tools bluez-utils bluez-hid2hic blueman
+
+# https://wiki.archlinux.org/index.php/Bluetooth
+# sudo geany /usr/share/dbus-1/system.d/bluetooth.conf
+
+# disable autosuspend bluetooth
+
+# echo '
+# options btusb enable_autosuspend=n
+# ' > /etc/modprobe.d/disable_autosuspend.conf
+
+# check it
+systool -v -m btusb
+
+
+# automate bluetoothctl  commands
+# example: echo -e "<command1>\n<command2>\n" | bluetoothctl
+
+# echo -e 'power on\nconnect \t \nquit' | bluetoothctl
+# echo -e 'power on\nscan on' | bluetoothctl
+
+# echo -e "agent on\ndefault-agent\ntrust 34:88:5D:5C:0C:62\npair 34:88:5D:5C:0C:62\nconnect 34:88:5D:5C:0C:62" | bluetoothctl 
+
+sudo rfkill unblock all
+
+# echo -e "power on\nagent on\ndefault-agent\nscan on\ntrust 34:88:5D:5C:0C:62\npair 34:88:5D:5C:0C:62\nconnect 34:88:5D:5C:0C:62" | bluetoothctl 
+# echo -e "power on\nagent on\ndefault-agent\nscan on\nquit" | bluetoothctl 
+echo -e "scan on" | bluetoothctl 
+echo -e "trust 34:88:5D:5C:0C:62" | bluetoothctl 
+

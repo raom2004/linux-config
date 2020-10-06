@@ -1,3 +1,4 @@
+#!/bin/bash
 # url="https://github.com/coffeeking/chihuahua-sound-theme.git"
 # git clone $url /tmp/cofeeking
 # cp -R /tmp/cofeeking/chihuahua /usr/share/sounds
