@@ -16,11 +16,9 @@ if [[ ! -n $(cat ~/.zshrc | grep 'emacs') ]]; then
     cd /tmp/yay
     makepkg -si
     yay -S --noconfirm zsh-theme-powerlevel10k-git
-    sed -i 's@\[\[ ! -f ~/.p10k.zsh \]\] || source ~/.p10k.zsh@@g' ~/.zshrc
-    echo "[[ ! -f ~/.p10k.zsh ]] || source ${private_directory}/.p10k.zsh" >> ~/.zshrc
-    echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
-    # sed -i "s@\[\[ ! -f ~/\.p10k\.zsh \]\] || source ~/\.p10k\.zsh@[[ ! -f ~/.p10k.zsh ]] || source ${private_directory}/.p10k.zsh@g" ~/.zshrc
+    
+    mkdir -p ~/.local/share/fonts
+    cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+    
+    pacman -Qi screenfetch >/dev/null  2>&1 || sudo pacman -Sy screenfetch --noconfirm # && echo 'if [ -f /usr/bin/screenfetch ]; then screenfetch -t; fi' >> ~/.zshrc
 fi
-
-pacman -Qi screenfetch >/dev/null  2>&1 || sudo pacman -Sy screenfetch --noconfirm # && echo 'if [ -f /usr/bin/screenfetch ]; then screenfetch -t; fi' >> ~/.zshrc
-# pacman -Qi screenfetch >/dev/null  2>&1 || sudo pacman -Sy screenfetch --noconfirm && echo 'if [ -f /usr/bin/screenfetch ]; then screenfetch -t; fi' >> ~/.zshrc

@@ -49,42 +49,29 @@ pacman -Syu --needed --noconfirm screenfetch deluge deluge-gtk blueberry p7zip g
 # pacman -Sy --needed --noconfirm adwaita-icon-theme akonadiconsole breeze-icons gnome-icon-theme-symbolic icon-naming-utils kemoticons oxygen-icons oxygen-icons-svg
 # test this code to check if previous line is required or not (2020-10-08)
 # ;testing
-pacman -Sy --needed --noconfirm oxygen-icons oxygen-icons-svg
+# pacman -Sy --needed --noconfirm oxygen-icons oxygen-icons-svg
+pacman -Sy --needed --noconfirm $(pacman -Ssq icons)
+pacman -Sy --needed --noconfirm $(pacman -Ssq roboto)
+pacman -Sy --needed --noconfirm $(pacman -Ssq ttf icon)
 
+## nvidia support
 
-## FIXME 2020-10-06 error during cuda installing
+# install nvidia drivers (remenber tu use nvidia-lts in linux-lts)
 
-pacman -Sy --needed --noconfirm nvidia nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
+pacman -Sy --needed --noconfirm nvidia-lts nvidia-utils nvidia-settings xorg-server-devel opencl-nvidia
 
-pacman -Sy cuda
-
-#  cuda-11.1.0-2-x86_64    2.1 GiB  5.84 MiB/s 06:13 [----------------------] 100%
-# (1/1) checking keys in keyring                     [----------------------] 100%
-# downloading required keys...
-# :: Import PGP key 5A45B06B81CAB876, "Konstantin Gizdov <arch@kge.pw>"? [Y/n] Y
-# (1/1) checking package integrity                   [----------------------] 100%
+## error during cuda-11.1.0-2-x86_64 pacman installing (2020-10-06)
+# code: pacman -Sy cuda
 # error: cuda: key "C5A5958FD7785FAD982FA2EC5A45B06B81CAB876" is unknown
-# :: Import PGP key C5A5958FD7785FAD982FA2EC5A45B06B81CAB876? [Y/n] Y
-# error: key "C5A5958FD7785FAD982FA2EC5A45B06B81CAB876" could not be looked up remotely
-# :: File /var/cache/pacman/pkg/cuda-11.1.0-2-x86_64.pkg.tar.zst is corrupted (invalid or corrupted package (PGP signature)).
-# Do you want to delete it? [Y/n] Y
 # error: failed to commit transaction (invalid or corrupted package (PGP signature))
 # Errors occurred, no packages were upgraded.
 
-## posible solution
-# source: https://wiki.archlinux.org/index.php/Pacman#Signature_from_%22User_%3Cemail@example.org%3E%22_is_unknown_trust,_installation_failed
+## Solution: download it and install it
+url="https://ftp5.gwdg.de/pub/linux/archlinux/community/os/x86_64/cuda-11.1.0-2-x86_64.pkg.tar.zst" | FILE=$(basename -- $url)
+# sudo -u angel wget "$url" -P /tmp/
+# print "installing ${FILE}\n"
+# pacman -U "/tmp/$FILE"
+pacman -U "/run/media/angel/w7Black/Instaladores_7N/CUDA/archlinux/$FILE" --noconfirm
 
-# ;testing:
-# pacman-key --refresh-key
-# pacman -Sy archlinux-keyring && pacman -Su
-# sudo rm -rf /etc/pacman.d/gnupg
-# pacman-key --init
-# pacman-key --populate archlinux
-
-# # install specifically: cuda 10.2
-# url="http://archlinux.arkena.net/archive/packages/c/cuda/cuda-10.2.89-2-x86_64.pkg.tar.xz"
-# FILE=$(basename -- $url)
-# # sudo -u angel wget "$url" -P /tmp/
-# # print "installing ${FILE}\n"
-# # pacman -U "/tmp/$FILE"
-# pacman -U "/run/media/angel/w7Black/Instaladores_7N/CUDA/$FILE"
+## pacman: install packages offline
+# source: https://wiki.archlinux.org/index.php/Offline_installation_of_packages

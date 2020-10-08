@@ -3,8 +3,8 @@
 # git clone $url /tmp/cofeeking
 # cp -R /tmp/cofeeking/chihuahua /usr/share/sounds
 
-# git clone "https://aur.archlinux.org/yaru.git" /tmp/yaru
 sudo pacman -Sy meson sassc --needed --noconfirm
+git clone "https://aur.archlinux.org/yaru.git" /tmp/yaru
 cd /tmp/yaru
 makepkg
 # sudo -u angel makepkg

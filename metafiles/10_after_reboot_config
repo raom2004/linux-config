@@ -1,0 +1,8 @@
+#!/bin/bash
+private_directory=/run/media/$USER/KN28
+
+# sed -i 's@\[\[ ! -f ~/.p10k.zsh \]\] || source ~/.p10k.zsh@@g' ~/.zshrc
+# echo "[[ ! -f ~/.p10k.zsh ]] || source ${private_directory}/.p10k.zsh" >> ~/.zshrc
+sed -i "s@\[\[ ! -f ~/\.p10k\.zsh \]\] || source ~/\.p10k\.zsh@[[ ! -f ~/.p10k.zsh ]] || source ${private_directory}/.p10k.zsh@g" ~/.zshrc
+echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
+
