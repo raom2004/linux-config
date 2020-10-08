@@ -14,6 +14,9 @@ FILE=/etc/modprobe.d/disable_autosuspend.conf
 options   btusb enable_autosuspend=n
 ' > /etc/modprobe.d/disable_autosuspend.conf"
 
+sudo sed -i 's/#AutoEnable=false/AutoEnable=true/g' /etc/bluetooth/main.conf
+sudo sed -i 's/#DiscoverableTimeout = 0/DiscoverableTimeout = 0/g' /etc/bluetooth/main.conf
+
 # check it
 systool -v -m btusb
 

@@ -6,4 +6,21 @@
 # Install oh-my-bash in custom DIR
 # export OSH="/run/media/angel/KN28/emacshome/.linux-config/.dotfiles/oh-my-bash"; sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
-cat /run/media/angel/KN28/emacshome/.linux-config/bash-customization.txt >> ~/.bashrc 
+[[ ! -n $(cat ~/.bashrc | grep emacs) ]] && cat /run/media/angel/KN28/emacshome/.linux-config/bash-customization.txt >> ~/.bashrc 
+
+private_directory=/run/media/$USER/KN28
+if [[ ! -n $(cat ~/.zshrc | grep 'emacs') ]]; then
+    sed -i "s@alias grep='grep --color=auto'@alias grep=\'grep --color=auto'\nalias emacs='emacs -q -l ${private_directory}/init.el'@g" ~/.zshrc
+    # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${private_directory}/powerlevel10k
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    cd /tmp/yay
+    makepkg -si
+    yay -S --noconfirm zsh-theme-powerlevel10k-git
+    sed -i 's@\[\[ ! -f ~/.p10k.zsh \]\] || source ~/.p10k.zsh@@g' ~/.zshrc
+    echo "[[ ! -f ~/.p10k.zsh ]] || source ${private_directory}/.p10k.zsh" >> ~/.zshrc
+    echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
+    # sed -i "s@\[\[ ! -f ~/\.p10k\.zsh \]\] || source ~/\.p10k\.zsh@[[ ! -f ~/.p10k.zsh ]] || source ${private_directory}/.p10k.zsh@g" ~/.zshrc
+fi
+
+pacman -Qi screenfetch >/dev/null  2>&1 || sudo pacman -Sy screenfetch --noconfirm # && echo 'if [ -f /usr/bin/screenfetch ]; then screenfetch -t; fi' >> ~/.zshrc
+# pacman -Qi screenfetch >/dev/null  2>&1 || sudo pacman -Sy screenfetch --noconfirm && echo 'if [ -f /usr/bin/screenfetch ]; then screenfetch -t; fi' >> ~/.zshrc
