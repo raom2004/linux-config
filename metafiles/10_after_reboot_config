@@ -6,3 +6,8 @@ private_directory=/run/media/$USER/KN28
 sed -i "s@\[\[ ! -f ~/\.p10k\.zsh \]\] || source ~/\.p10k\.zsh@[[ ! -f ~/.p10k.zsh ]] || source ${private_directory}/.p10k.zsh@g" ~/.zshrc
 echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
 
+#  customize shell colors
+# https://github.com/romkatv/powerlevel10k#set-colors-through-Powerlevel10k-configuration-parameters
+
+# show colors in zsh shell
+zsh /run/media/$USER/KN28/256-colors-zsh
