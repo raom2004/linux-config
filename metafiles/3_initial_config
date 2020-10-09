@@ -9,7 +9,7 @@ backup_dir="/run/media/angel/KN28/emacshome/.linux-config/backup-26_08_2020"
 
 # restore keybindings backup
 
-dconf load /org/cinnamon/desktop/keybindings/ < ${backup_dir}/dconf-settings.conf
+# dconf load /org/cinnamon/desktop/keybindings/ < ${backup_dir}/dconf-settings.conf
 
 
 # restore nemo file manager bookmarks
@@ -33,22 +33,21 @@ cp -R ${backup_dir}/autostart-backup ~/.config/autostart
 
 
 ## set applications custom config
-
 # Default Applications and Associations
 
-cp /run/media/angel/KN28/emacshome/.config/mimeapps.list $HOME/.config/mimeapps.list
+cp /run/media/angel/KN28/emacshome/.config/mimeapps.list ~/.config/mimeapps.list
 
 # Okular
 
 # (pdf color scheme)
-cp /run/media/angel/KN28/emacshome/.config/okularpartrc $HOME/.config/okularpartrc
+cp /run/media/$USER/KN28/emacshome/.config/okularpartrc ~/.config/okularpartrc
 
 # toggle change color (Shitf+F9)
-cp -R /run/media/angel/KN28/emacshome/.local/share/kxmlgui5 $HOME/.local/share/kxmlgui5
+cp -R /run/media/$USER/KN28/emacshome/.local/share/kxmlgui5 ~/.local/share/kxmlgui5
 
 # Geany (copy complete config)
 
-cp -R /run/media/angel/KN28/emacshome/.config/geany  ~/.config
+cp -R /run/media/$USER/KN28/emacshome/.config/geany  ~/.config
 
 # (geany download color schemes) Deprecated 2020-09-09
 # git clone https://github.com/geany/geany-themes.git /tmp/geany-themes
@@ -57,7 +56,7 @@ cp -R /run/media/angel/KN28/emacshome/.config/geany  ~/.config
 
 # linux autologin (source:[[https://www.maketecheasier.com/enable-autologin-lightdm/][url]])
 
-cd /run/media/angel/KN28
+cd /run/media/$USER/KN28
 git config --global user.email "raom2004@gmail.com"
 git config --global user.name "angel"
 git config --list
@@ -68,7 +67,7 @@ sudo sed -i 's%#autologin-user-timeout=0%autologin-user-timeout=0%g' /etc/lightd
 
 sudo groupadd -r autologin
 
-sudo gpasswd -a angel autologin
+sudo gpasswd -a "$USER" autologin
 
 # hidden boot menu (GRUB)
 

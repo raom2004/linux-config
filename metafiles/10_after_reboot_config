@@ -11,3 +11,6 @@ echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >> ~/.z
 
 # show colors in zsh shell
 zsh /run/media/$USER/KN28/256-colors-zsh
+
+firefox -setDefaultBrowser
+firefox -preferenses

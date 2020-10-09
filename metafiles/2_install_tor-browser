@@ -5,7 +5,7 @@
 
 # install depedencies (if needed)
 
-sudo pacman -Sy --needed gnupg python python-gpgme python-pyqt5 python-pysocks python-requests tor python-gnupg --noconfirm
+sudo pacman -Sy --needed --noconfirm gnupg python python-gpgme python-pyqt5 python-pysocks python-requests tor python-gnupg
 
 
 # set $PWD
@@ -21,8 +21,15 @@ url="https://dist.torproject.org/torbrowser/10.5a1/tor-browser-linux64-10.5a1_en
 
 # check latest version here
 # https://dist.torproject.org/torbrowser
-
-[ ! -d "tor-browser_en-US" ] && wget -c "$url" && tar -xf "$FILE"
+tor_dir="tor-browser_en-US"
+# [ ! -d /opt/"$tor_dir" ] && wget -c "$url" && tar -xf "$FILE" && sudo mv "$tor_dir" /opt && cd /opt/"$tor_dir" &&
+if [ ! -d /opt/"$tor_dir" ]; then
+    wget -c "$url"
+    tar -xf "$FILE"
+    sudo mv "$tor_dir" /opt
+    cd /opt/"$tor_dir"
+    ./start-tor-browser.desktop --register.app
+fi
 
 # (deprecated)
 # git clone torbrowser-launcher repository
