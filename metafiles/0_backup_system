@@ -1,0 +1,53 @@
+#!/bin/bash
+rm -rf /tmp/Packages
+if [ ! -d /tmp/Packages ]; then
+    cd /tmp
+    mkdir -p Packages && cd /tmp/Packages
+
+    ## make a list of packages to download
+    # list all packages in system
+    # pacman -Qq > initial-list-packages.txt
+    # list all native packages
+    # pacman -Qnq > initial-list-packages.txt
+    pacman -Qnq > initial_lines=`wc -l initial-list-packages.txt`
+    initial-list-packages.txt
+    echo "$initial_lines"
+    # check for error (manual installed packages) and save it in other list 
+
+    # sudo pacman -Syw $(pacman -Qq) 2> error-packages.txt
+    # sudo pacman -Syw $(pacman -Qnq) 2> error-packages.txt
+    # pacman -Sw $(pacman -Qnq) 2> error-packages.txt
+    pacman -Syw $(pacman -Qnq) 2> error-packages.txt
+    cat error-packages.txt | awk '{ print $5 }' > error-packages.txt
+
+    # remove error packages from the main list
+
+    sed -i -e ':a;N;$!ba;s/cuda//g' initial-list-packages.txt
+    sed -i -e ':a;N;$!ba;s/rstudio-desktop-bin//g' initial-list-packages.txt
+    sed -i -e ':a;N;$!ba;s/signon-user//g' initial-list-packages.txt
+    sed -i -e ':a;N;$!ba;s/interface//g' initial-list-packages.txt
+    sed -i -e ':a;N;$!ba;s/ttf-font-logos//g' initial-list-packages.txt
+    sed -i -e ':a;N;$!ba;s/yay//g' initial-list-packages.txt
+    sed -i -e ':a;N;$!ba;s/zsh-theme-powerlevel10k-git//g' initial-list-packages.txt
+
+    awk 'NF' initial-list-packages.txt > curated-list-packages.txt
+    
+    # final_lines=`wc -l curated-list-packages.txt`
+    # echo "$final_lines"
+
+    # printf "\n%s : %s\n" "$initial_lines" "$final_lines"
+
+    # # sudo pacman -Syw $(cat curated-list-packages.txt)
+    # sudo pacman -Sw $(cat curated-list-packages.txt)
+    # # rm -rf initial-list-packages.txt error-packages.txt curated-list-packages.txt
+fi
+
+
+    # TODO = improbe this code using this
+
+    # # declare an array called array and define 3 vales
+    # array=( one two three )
+    # for i in "${array[@]}"
+    # do
+    # 	echo $i
+    # done
