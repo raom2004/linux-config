@@ -5,9 +5,7 @@
 ## ------- Arch linux software installation ------- ##
 
 ## remove unnecesary packages
-
 # pacman -R chromium blueman --noconfirm
-
 
 ## install r statistics
 
@@ -50,6 +48,9 @@ pacman -Syu --needed --noconfirm screenfetch deluge deluge-gtk blueberry p7zip g
 # test this code to check if previous line is required or not (2020-10-08)
 # ;testing
 # pacman -Sy --needed --noconfirm oxygen-icons oxygen-icons-svg
+
+## after different tests I opted for install packages
+# adding font and icon support, using the next expresions:
 pacman -Sy --needed --noconfirm $(pacman -Ssq icons)
 pacman -Sy --needed --noconfirm $(pacman -Ssq roboto)
 pacman -Sy --needed --noconfirm $(pacman -Ssq ttf icon)
@@ -66,8 +67,8 @@ pacman -Sy --needed --noconfirm nvidia-lts nvidia-utils nvidia-settings xorg-ser
 # error: failed to commit transaction (invalid or corrupted package (PGP signature))
 # Errors occurred, no packages were upgraded.
 
-## Solution: download it and install it
-url="https://ftp5.gwdg.de/pub/linux/archlinux/community/os/x86_64/cuda-11.1.0-2-x86_64.pkg.tar.zst" | FILE=$(basename -- $url)
+## Solution: after multiples tries, the best was download and install it
+url="https://ftp5.gwdg.de/pub/linux/archlinux/community/os/x86_64/cuda-11.1.0-2-x86_64.pkg.tar.zst" && FILE=$(basename -- $url)
 # sudo -u angel wget "$url" -P /tmp/
 # print "installing ${FILE}\n"
 # pacman -U "/tmp/$FILE"

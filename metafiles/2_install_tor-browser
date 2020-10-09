@@ -12,11 +12,17 @@ sudo pacman -Sy --needed gnupg python python-gpgme python-pyqt5 python-pysocks p
 
 cd ~/Downloads
 
-
 # download tor-browser if file do not exists
 
-[ ! -d "~/Downloads/tor-browser_en-US" ] && wget -c https://www.torproject.org/dist/torbrowser/9.5.4/tor-browser-linux64-9.5.4_en-US.tar.xz && tar -xf tor-browser-linux64-9.5.4_en-US.tar.xz
+# (deprecated) 2020-10-09
+# [ ! -d "~/Downloads/tor-browser_en-US" ] && wget -c https://www.torproject.org/dist/torbrowser/9.5.4/tor-browser-linux64-9.5.4_en-US.tar.xz && tar -xf tor-browser-linux64-9.5.4_en-US.tar.xz
 
+url="https://dist.torproject.org/torbrowser/10.5a1/tor-browser-linux64-10.5a1_en-US.tar.xz" && FILE=$(basename -- $url)
+
+# check latest version here
+# https://dist.torproject.org/torbrowser
+
+[ ! -d "tor-browser_en-US" ] && wget -c "$url" && tar -xf "$FILE"
 
 # (deprecated)
 # git clone torbrowser-launcher repository
@@ -27,13 +33,13 @@ cd ~/Downloads
 # cd ~/.local/share/applications
 
 
-# create folder
+# # create folder
 
-mkdir -p ~/.local/share/applications/
+# mkdir -p ~/.local/share/applications/
 
 
-# copy launcher into folder
+# # copy launcher into folder
 
-cp ~/Downloads/tor-browser_en-US/start-tor-browser.desktop ~/.local/share/applications/start-tor-browser.desktop
+# cp ~/Downloads/tor-browser_en-US/start-tor-browser.desktop ~/.local/share/applications/start-tor-browser.desktop
 
-cat ~/.local/share/applications/start-tor-browser.desktop
+# cat ~/.local/share/applications/start-tor-browser.desktop
