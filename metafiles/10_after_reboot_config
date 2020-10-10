@@ -14,3 +14,5 @@ zsh /run/media/$USER/KN28/256-colors-zsh
 
 firefox -setDefaultBrowser
 firefox -preferenses
+
+yay -S ttf-font-logos

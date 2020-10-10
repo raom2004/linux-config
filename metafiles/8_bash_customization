@@ -17,8 +17,11 @@ if [[ ! -n $(cat ~/.zshrc | grep 'emacs') ]]; then
     makepkg -si
     yay -S --noconfirm zsh-theme-powerlevel10k-git
     
-    mkdir -p ~/.local/share/fonts
-    cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+    # mkdir -p ~/.local/share/fonts
+    # cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+
+    pacman -Sy ttf-nerd-fonts-symbol --noconfirm
     
     pacman -Qi screenfetch >/dev/null  2>&1 || sudo pacman -Sy screenfetch --noconfirm # && echo 'if [ -f /usr/bin/screenfetch ]; then screenfetch -t; fi' >> ~/.zshrc
+    gnome-terminal
 fi

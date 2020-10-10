@@ -44,16 +44,16 @@ fi
 pacman -Syu --needed --noconfirm screenfetch deluge deluge-gtk blueberry p7zip gitg gsettings-desktop-schemas libreoffice-fresh-en-gb flameshot tcsh qemu cdrkit wine dlang-dmd fbreader mono languagetool aspell-en aspell-de aspell-es tree pandoc cmake aegisub ntfs-3g gpicview git python-pip python-virtualenv python-pipenv python-virtualenvwrapper obs-studio audacious audacious-plugins mpg123 audacity klavaro deluge okular geany firefox gparted dosfstools mtools rsync w3m lynx texlive-most imagemagick jdk-openjdk ccid opensc pcsc-tools youtube-dl perl-xml-parser perl-xml-simple inkscape emacs
 
 # FIXME 2020-10-06 missing icons in cinnamon
-# pacman -Sy --needed --noconfirm adwaita-icon-theme akonadiconsole breeze-icons gnome-icon-theme-symbolic icon-naming-utils kemoticons oxygen-icons oxygen-icons-svg
+ pacman -Sy --needed --noconfirm adwaita-icon-theme akonadiconsole breeze-icons gnome-icon-theme-symbolic icon-naming-utils kemoticons oxygen-icons oxygen-icons-svg
 # test this code to check if previous line is required or not (2020-10-08)
 # ;testing
-# pacman -Sy --needed --noconfirm oxygen-icons oxygen-icons-svg
+pacman -Sy --needed --noconfirm oxygen-icons oxygen-icons-svg
 
 ## after different tests I opted for install packages
 # adding font and icon support, using the next expresions:
-pacman -Sy --needed --noconfirm $(pacman -Ssq icons)
-pacman -Sy --needed --noconfirm $(pacman -Ssq roboto)
-pacman -Sy --needed --noconfirm $(pacman -Ssq ttf icon)
+# pacman -Sy --needed --noconfirm $(pacman -Ssq icons)
+# pacman -Sy --needed --noconfirm $(pacman -Ssq roboto)
+# pacman -Sy --needed --noconfirm $(pacman -Ssq ttf icon)
 
 ## nvidia support
 
@@ -72,7 +72,16 @@ url="https://ftp5.gwdg.de/pub/linux/archlinux/community/os/x86_64/cuda-11.1.0-2-
 # sudo -u angel wget "$url" -P /tmp/
 # print "installing ${FILE}\n"
 # pacman -U "/tmp/$FILE"
-pacman -U "/run/media/angel/w7Black/Instaladores_7N/CUDA/archlinux/$FILE" --noconfirm
+pacman -U "/run/media/angel/w7Black/Instaladores_7N/CUDA/$FILE" --noconfirm
 
 ## pacman: install packages offline
 # source: https://wiki.archlinux.org/index.php/Offline_installation_of_packages
+
+# The cuda binaries are in /opt/cuda/bin
+# The cuda samples are in /opt/cuda/samples
+# The cuda docs are in /opt/cuda/doc
+# You need to relogin in order for the cuda binaries to appear in your PATH
+# Optional dependencies for cuda
+#     gdb: for cuda-gdb
+#     java-runtime=8: for nsight and nvvp
+# :: Running post-transaction hooks...
