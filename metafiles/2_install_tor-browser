@@ -14,15 +14,20 @@ cd ~/Downloads
 
 # download tor-browser if file do not exists
 
-# (deprecated) 2020-10-09
-# [ ! -d "~/Downloads/tor-browser_en-US" ] && wget -c https://www.torproject.org/dist/torbrowser/9.5.4/tor-browser-linux64-9.5.4_en-US.tar.xz && tar -xf tor-browser-linux64-9.5.4_en-US.tar.xz
+ url="https://dist.torproject.org/torbrowser/10.5a1/tor-browser-linux64-10.5a1_en-US.tar.xz" && FILE=$(basename -- $url)
+# if [ ! -d "~/Downloads/tor-browser_en-US" ]; then
+#     wget -c "$url"
+#     tar -xf "$FILE"
+#     cd tor-browser_en-US
+#     ./start-tor-browser.desktop --register.app
+# fi
 
-url="https://dist.torproject.org/torbrowser/10.5a1/tor-browser-linux64-10.5a1_en-US.tar.xz" && FILE=$(basename -- $url)
 
 # check latest version here
 # https://dist.torproject.org/torbrowser
 tor_dir="tor-browser_en-US"
 # [ ! -d /opt/"$tor_dir" ] && wget -c "$url" && tar -xf "$FILE" && sudo mv "$tor_dir" /opt && cd /opt/"$tor_dir" &&
+
 if [ ! -d /opt/"$tor_dir" ]; then
     wget -c "$url"
     tar -xf "$FILE"
