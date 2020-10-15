@@ -1,10 +1,11 @@
 #!/bin/bash
 
-sudo pacman -Sy --needed --noconfirm bluez bluez-libs bluez-tools bluez-utils blueman
-# bluez-hid2hic
+# sudo pacman -Sy --needed --noconfirm bluez pulseaudio-bluetooth bluez-utils blueman bluez-hid2hci
 
-# https://wiki.archlinux.org/index.php/Bluetooth
-# sudo geany /usr/share/dbus-1/system.d/bluetooth.conf
+# # sudo pacman -Sy --needed --noconfirm bluez bluez-libs bluez-tools bluez-utils blueman
+
+# # https://wiki.archlinux.org/index.php/Bluetooth
+# # sudo geany /usr/share/dbus-1/system.d/bluetooth.conf
 
 # disable autosuspend bluetooth
 # source: https://linuxize.com/post/bash-check-if-file-exists/
@@ -13,29 +14,93 @@ FILE=/etc/modprobe.d/disable_autosuspend.conf
 [ ! -f "$FILE" ] && sudo bash -c "echo '
 options   btusb enable_autosuspend=n
 ' > /etc/modprobe.d/disable_autosuspend.conf"
+cat /etc/modprobe.d/disable_autosuspend.conf
 
-sudo sed -i 's/#AutoEnable=false/AutoEnable=true/g' /etc/bluetooth/main.conf
-sudo sed -i 's/#DiscoverableTimeout = 0/DiscoverableTimeout = 0/g' /etc/bluetooth/main.conf
+# sudo sed -i 's/#AutoEnable=false/AutoEnable=true/g' /etc/bluetooth/main.conf
+# sudo sed -i 's/#DiscoverableTimeout = 0/DiscoverableTimeout = 0/g' /etc/bluetooth/main.conf
 
-# check it
-systool -v -m btusb
+# # check it
+# systool -v -m btusb
 
 
-# automate bluetoothctl  commands
-# example: echo -e "<command1>\n<command2>\n" | bluetoothctl
+# # automate bluetoothctl  commands
+# # example: echo -e "<command1>\n<command2>\n" | bluetoothctl
 
-# echo -e 'power on\nconnect \t \nquit' | bluetoothctl
-# echo -e 'power on\nscan on' | bluetoothctl
+# # echo -e 'power on\nconnect \t \nquit' | bluetoothctl
+# # echo -e 'power on\nscan on' | bluetoothctl
 
-# echo -e "agent on\ndefault-agent\ntrust 34:88:5D:5C:0C:62\npair 34:88:5D:5C:0C:62\nconnect 34:88:5D:5C:0C:62" | bluetoothctl 
+# # echo -e "agent on\ndefault-agent\ntrust 34:88:5D:5C:0C:62\npair 34:88:5D:5C:0C:62\nconnect 34:88:5D:5C:0C:62" | bluetoothctl 
 
-sudo rfkill unblock all
+# # sudo rfkill unblock all
 
-# echo -e "power on\nagent on\ndefault-agent\nscan on\ntrust 34:88:5D:5C:0C:62\npair 34:88:5D:5C:0C:62\nconnect 34:88:5D:5C:0C:62" | bluetoothctl 
-# echo -e "power on\nagent on\ndefault-agent\nscan on\nquit" | bluetoothctl 
-sudo echo -e "power on" | bluetoothctl 
-sudo echo -e "scan on" | bluetoothctl 
-sudo echo -e "default-agent" | bluetoothctl 
-sudo echo -e "trust 34:88:5D:5C:0C:62" | bluetoothctl 
-sudo echo -e "pair 34:88:5D:5C:0C:62" | bluetoothctl 
-sudo echo -e "connect 34:88:5D:5C:0C:62" | bluetoothctl 
+# # echo -e "power on\nagent on\ndefault-agent\nscan on\ntrust 34:88:5D:5C:0C:62\npair 34:88:5D:5C:0C:62\nconnect 34:88:5D:5C:0C:62" | bluetoothctl 
+# # echo -e "power on\nagent on\ndefault-agent\nscan on\nquit" | bluetoothctl 
+
+# # sudo echo -e "power on" | bluetoothctl 
+# # sudo echo -e "scan on" | bluetoothctl 
+# # sudo echo -e "default-agent" | bluetoothctl 
+# # sudo echo -e "trust 34:88:5D:5C:0C:62" | bluetoothctl 
+# # sudo echo -e "pair 34:88:5D:5C:0C:62" | bluetoothctl 
+# # sudo echo -e "connect 34:88:5D:5C:0C:62" | bluetoothctl 
+
+# # solution: udev
+# # source:https://askubuntu.com/questions/838697/share-files-between-2-computers-via-bluetooth-from-terminal#842391
+
+# ## ------------------------------------  OUTDATED STEP
+# # Set bluetooth power up
+# sudo bash -c "echo 'ACTION==\"add\", KERNEL==\"hci0\", RUN+=\"/usr/bin/hciconfig %k up\"' > /etc/udev/rules.d/10-local.rules"
+# ## --------------------------------------------------------
+# # actually, the only requirement is to uncomment the last statement in /etc/bluetooth/main.conf “AutoEnable=true”, and now bluetooth will be powered on at boot
+# ## --------------------------------------------------------
+
+# # After a suspend/resume-cycle, the device can be powered on automatically using a custom systemd service:
+
+# # sudo bash -c "echo '[Unit]
+# # Description=Bluetooth auto power on
+# # After=bluetooth.service sys-subsystem-bluetooth-devices-%i.device suspend.target
+
+# # [Service]
+# # Type=oneshot
+# # ExecStart=/usr/bin/hciconfig %i up
+
+# # [Install]
+# # WantedBy=suspend.target' > /etc/systemd/system/bluetooth-auto-power@hci0.service"
+
+
+
+
+# # check the result with
+# # bt-device -l
+
+# # posible fil to manek changes:
+# # /etc/systemd/system/dbus-org.bluez.service
+
+
+
+## ------------------------------------------------------------
+# Debugging bluetooth
+## ------------------------------------------------------------
+
+# source: https://stackoverflow.com/questions/37003147/i-want-to-enable-debug-messages-on-bluez
+
+check=$(grep 'ExecStart=/usr/lib/bluetooth/bluetoothd -n -d' /usr/lib/systemd/system/bluetooth.service)
+if [ ! "$check" ]; then
+    sudo sed -i 's|ExecStart=/usr/lib/bluetooth/bluetoothd|ExecStart=/usr/lib/bluetooth/bluetoothd -n -d|' /usr/lib/systemd/system/bluetooth.service
+    echo 'added option "-n -d" to line:'
+    echo 'ExecStart=/usr/lib/bluetooth/bluetoothd -n -d'
+    echo 'in /usr/lib/systemd/system/bluetooth.service'
+    echo ''
+    cat /usr/lib/systemd/system/bluetooth.service
+    # echo 'Now you get your information in /var/log/syslog'
+    # echo ''
+    echo 'The logs can be seen using:'
+    echo 'journalctl --unit=bluetooth -f'
+fi
+
+# if [ -f /etc/modprobe.d/iwlwifi.conf ]; then
+#     sudo bash -c "echo 'options iwlwifi bt_coex_active=0' > /etc/modprobe.d/iwlwifi.conf"
+#     cat /etc/modprobe.d/iwlwifi.conf
+# fi
+
+## ------------------------------------------------------------
+## ------------------------------------------------------------

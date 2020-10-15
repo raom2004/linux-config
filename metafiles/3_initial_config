@@ -59,6 +59,7 @@ cp -R /run/media/$USER/KN28/emacshome/.config/geany  ~/.config
 cd /run/media/$USER/KN28
 git config --global user.email "raom2004@gmail.com"
 git config --global user.name "angel"
+git config --global core.editor emacs
 git config --list
 cd /
 sudo sed -i 's%#autologin-guest=false%autologin-guest=false%g' /etc/lightdm/lightdm.conf
