@@ -1,0 +1,18 @@
+#+title: Archlinux local config files
+#+author: Ricardo Orbegozo Medina
+#+date: <2020-10-15 Thu>
+
+
+Example of local (bash & zsh) shell configuration scripts for Archlinux.
+
+
+* Archlinux
+Archlinux is a GNU/linux distribution focused on simplicity. The installation consist in a minimal base system allowing the user to only add what is purposely required, remaining an user-centric distro where others attempt to be more user-friendly. Therefore, Archlinux target users with a do-it-yourself attitude to read the documentation and solve their own problems, maturing as a proficient GNU/Linux user during the process.
+
+* Archlinux config shell scripts
+Its not a good security strategy to deposit local configuration files in a public access repository. Instead, my purpose is not other than share the most relevant lines of code for hardware performance optimisation (like GPU acceleration). In addition, This repo also includes software applications adequate for literate programming and scientific research.
+
+---
+
+Forked from official documentation: https://wiki.archlinux.org/.
+
